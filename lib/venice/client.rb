@@ -44,7 +44,7 @@ module Venice
       when 0, 21006
         puts receipt_attributes.inspect
         puts "receipt attribute class: #{receipt_attributes.class}"
-        receipt_attrs_with_env = receipt_attributes.merge!(env: verification_env)
+        receipt_attrs_with_env = receipt_attributes.merge!("env": verification_env)
         receipt = Receipt.new(receipt_attrs_with_env)
 
         if latest_receipt_attributes = json['latest_receipt_info']
