@@ -42,8 +42,6 @@ module Venice
 
       case status
       when 0, 21006
-        puts receipt_attributes.inspect
-        puts "receipt attribute class: #{receipt_attributes.class}"
         receipt_attrs_with_env = receipt_attributes.merge!("env" => verification_env)
         receipt = Receipt.new(receipt_attrs_with_env)
 
