@@ -28,13 +28,22 @@ module Venice
       @verification_url = ENV['IAP_VERIFICATION_ENDPOINT']
     end
 
+    def verification_env
+      if self.verification_url ITUNES_PRODUCTION_RECEIPT_VERIFICATION_ENDPOINT
+        "Production"
+      else
+        "Sandbox"
+      end
+    end
+
     def verify!(data, options = {})
       json = json_response_from_verifying_data(data)
       status, receipt_attributes = json['status'].to_i, json['receipt']
 
       case status
       when 0, 21006
-        receipt = Receipt.new(receipt_attributes)
+        receipt_attrs_with_env = receipt_attributes.merge!(env: verification_env)
+        receipt = Receipt.new(receipt_attrs_with_env)
 
         if latest_receipt_attributes = json['latest_receipt_info']
           receipt.latest = Receipt.new(latest_receipt_attributes)
