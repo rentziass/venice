@@ -48,7 +48,7 @@ module Venice
       @bid = attributes['bid']
       @bvrs = attributes['bvrs']
       @env = attributes['env']
-
+      puts "atributes: #{attributes.inspect}"
       # expires_date is in ms since the Epoch, Time.at expects seconds
       @expires_at = Time.at(attributes['expires_date'].to_i / 1000) if attributes['expires_date']
 
