@@ -29,7 +29,7 @@ module Venice
     end
 
     def verification_env
-      if self.verification_url ITUNES_PRODUCTION_RECEIPT_VERIFICATION_ENDPOINT
+      if self.verification_url == ITUNES_PRODUCTION_RECEIPT_VERIFICATION_ENDPOINT
         "Production"
       else
         "Sandbox"
